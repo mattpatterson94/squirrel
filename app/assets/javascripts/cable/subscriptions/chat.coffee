@@ -1,3 +1,5 @@
+window.name = "#{Math.random()}"
+
 App.chatChannel = App.cable.subscriptions.create { channel: "ChatChannel", room: "Best Room"},
   received: (data) ->
     @appendLine(data)
@@ -8,8 +10,13 @@ App.chatChannel = App.cable.subscriptions.create { channel: "ChatChannel", room:
     )
 
   createLine: (data) ->
+    if data["sent_by"] == window.name
+      $class = "alert alert-info text-right"
+    else
+      $class = "alert alert-secondary"
+
     """
-      <div class="alert alert-info text-right" role="alert">
+      <div class="#{$class}" role="alert">
         #{data["body"]}
       </div>
     """

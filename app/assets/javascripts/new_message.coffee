@@ -8,6 +8,6 @@ $(document)
         $('#message').val('')
 
         App.chatChannel.send({
-          sent_by: "Anonymous",
+          sent_by: window.name,
           body: message
         })
